@@ -86,7 +86,7 @@ createServer(async (req, res) => {
             res.end();
         }
     }
-}).listen(8080);
+}).listen(process.env.PORT || 8080);
 
 /*const express = require("express");
 const { MongoClient } = require("mongodb");
