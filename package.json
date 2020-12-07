@@ -1,5 +1,6 @@
 {
     "name": "movielist",
+    "type": "module",
     "scripts": {
         "start": "node server/server.js",
         "lint": "eslint client/ server/"
