@@ -95,7 +95,7 @@ const { MongoClient } = require("mongodb");
 //const LocalStrategy = require('passport-local').Strategy;
 //const minicrypt = require('./miniCrypt');
 
-let secrets, username, password, url;
+/*let secrets, username, password, url;
 //let currUsers;
 if (!process.env.PASSWORD) {
     secrets = require('../secure.json');
@@ -106,7 +106,8 @@ if (!process.env.PASSWORD) {
     username = process.env.USERNAME;
     password = process.env.PASSWORD;
     url = process.env.DATABASE_URL;
-}
+}*/
+let url = `mongodb+srv://hickeyDBuser:hickeyDBpw@movielist.bbubk.mongodb.net/MovieList?retryWrites=true&w=majority`;
 
 const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const dbName = "MovieList";
