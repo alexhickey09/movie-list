@@ -90,10 +90,10 @@ createServer(async (req, res) => {
 
 const express = require("express");
 const { MongoClient } = require("mongodb");
-const expressSession = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const minicrypt = require('./miniCrypt');
+//const expressSession = require('express-session');
+//const passport = require('passport');
+//const LocalStrategy = require('passport-local').Strategy;
+//const minicrypt = require('./miniCrypt');
 
 let secrets, username, password, url;
 //let currUsers;
