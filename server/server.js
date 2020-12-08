@@ -1,4 +1,4 @@
-import {createServer} from 'http';
+/*import {createServer} from 'http';
 import {parse} from 'url';
 import {join} from 'path';
 import {writeFile, readFileSync, existsSync} from 'fs';
@@ -86,9 +86,9 @@ createServer(async (req, res) => {
             res.end();
         }
     }
-}).listen(process.env.PORT || 8080);
+}).listen(process.env.PORT || 8080);*/
 
-/*const express = require("express");
+const express = require("express");
 const { MongoClient } = require("mongodb");
 const expressSession = require('express-session');
 const passport = require('passport');
@@ -96,12 +96,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const minicrypt = require('./miniCrypt');
 
 let secrets, username, password, url;
-let currUsers;
+//let currUsers;
 if (!process.env.PASSWORD) {
-    secrets = require('../secrets.json');
+    secrets = require('../secure.json');
     username = secrets.username;
     password = secrets.password;
-    url = `mongodb+srv://${username}:${password}@dishsaver.knahq.mongodb.net/DishSaver?retryWrites=true&w=majority`;
+    url = `mongodb+srv://${username}:${password}@movielist.bbubk.mongodb.net/MovieList?retryWrites=true&w=majority`;
 } else {
     username = process.env.USERNAME;
     password = process.env.PASSWORD;
@@ -109,7 +109,7 @@ if (!process.env.PASSWORD) {
 }
 
 const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
-const dbName = "DishSaver";
+const dbName = "MovieList";
 
 let db, collection;
 
@@ -118,19 +118,19 @@ app.use(express.json());
 
 app.use(express.static("client"));
 
-app.post("/addfood", async (req, res) => {
-    collection = db.collection("food");
-    const foodItem = {
-        name: req.body.name,
-        category: req.body.category,
-        amount: req.body.amount,
-        nutrition: req.body.nutrition,
-        dc: req.body.dc
+app.post("/addWatchList", async (req, res) => {
+    collection = db.collection("Watch List");
+    const movie = {
+        title: req.body.title,
+        year: req.body.year,
+        cast: req.body.cast,
+        rating: req.body.rating,
+        notes: req.body.notes
     };
 
-    collection.insertOne(foodItem, (err) => {
+    collection.insertOne(movie, (err) => {
         if(err) {
-            res.send("Error with addfood POST request");
+            res.send("Error with addWatchList POST request");
         }
         else {
             res.send("Information has been passed successfully");
@@ -138,7 +138,7 @@ app.post("/addfood", async (req, res) => {
     });
 });
 
-app.get("/viewfood", (req, res) => { //Note: first parameter has to be req even though it isn't used
+/*app.get("/viewfood", (req, res) => { //Note: first parameter has to be req even though it isn't used
     collection = db.collection("food");
     collection.find({}).toArray((err, docs) => {
         if(err) {
@@ -254,7 +254,7 @@ app.get("/viewrequests", (req, res) => {
 app.post("/fulfillRequest", (req) => {
     collection = db.collection("requests");
     collection.deleteOne({name: req.body.name});
-});
+});*/
 
 
 client.connect(err => {
@@ -264,10 +264,10 @@ client.connect(err => {
         const port = process.env.PORT || 8080;
         app.listen(port);
         db = client.db(dbName);
-        getUsers();
+        //getUsers();
     }
 });
-
+/*
 async function getUsers() { //Getting a local copy of the users
     currUsers = await db.collection('users').find({}).toArray();
 }
@@ -412,7 +412,4 @@ app.get('/register',
         const path = __dirname + "/../client";
         res.sendFile("signup.html", {root: path});
     }
-);
-
-
-*/
+);*/

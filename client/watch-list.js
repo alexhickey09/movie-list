@@ -28,3 +28,21 @@ window.addEventListener("load", function() {
     notesHead.appendChild(notesHeadText);
     header.appendChild(notesHead);
 });
+
+document.getElementById("addWatchListButton").addEventListener('click', async function() {
+    const movie = {"title": document.getElementById("title").value,
+                      "year": document.getElementById("year").value,
+                      "cast": document.getElementById("cast").value,
+                      "rating": document.getElementById("rating").value,
+                      "notes": document.getElementById("notes").value,
+                    };
+
+    fetch('./addWatchList', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(movie),
+    });
+    //window.location.href = "dc-todaysfood.html";
+});
