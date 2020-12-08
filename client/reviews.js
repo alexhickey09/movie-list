@@ -5,26 +5,25 @@ window.addEventListener("load", function() {
     const header = thead.insertRow();
     
     const titleHead = document.createElement("th");
+    titleHead.classList.add("title-col");
     const titleHeadText = document.createTextNode("Movie Title");
     titleHead.appendChild(titleHeadText);
     header.appendChild(titleHead);
 
-    const yearHead = document.createElement("th");
-    const yearHeadText = document.createTextNode("Year");
-    yearHead.appendChild(yearHeadText);
-    header.appendChild(yearHead);
-
     const castHead = document.createElement("th");
+    castHead.classList.add("cast-col");
     const castHeadText = document.createTextNode("Notable Cast");
     castHead.appendChild(castHeadText);
     header.appendChild(castHead);
 
     const ratingHead = document.createElement("th");
+    ratingHead.classList.add("rating-col");
     const ratingHeadText = document.createTextNode("Rating");
     ratingHead.appendChild(ratingHeadText);
     header.appendChild(ratingHead);
 
     const notesHead = document.createElement("th");
+    notesHead.classList.add("notes-col");
     const notesHeadText = document.createTextNode("Notes");
     notesHead.appendChild(notesHeadText);
     header.appendChild(notesHead);
@@ -38,10 +37,6 @@ window.addEventListener("load", function() {
                 const title = row.insertCell();
                 const titleText = document.createTextNode(data[i].title);
                 title.appendChild(titleText);
-
-                const year = row.insertCell();
-                const yearText = document.createTextNode(data[i].year);
-                year.appendChild(yearText);
 
                 const cast = row.insertCell();
                 const castText = document.createTextNode(data[i].cast);
@@ -60,11 +55,10 @@ window.addEventListener("load", function() {
 
 document.getElementById("addReviewButton").addEventListener('click', async function() {
     const movie = {"title": document.getElementById("title").value,
-                      "year": document.getElementById("year").value,
-                      "cast": document.getElementById("cast").value,
-                      "rating": document.getElementById("rating").value,
-                      "notes": document.getElementById("notes").value,
-                    };
+                    "cast": document.getElementById("cast").value,
+                    "rating": document.getElementById("rating").value,
+                    "notes": document.getElementById("notes").value,
+                  };
 
     fetch('./addReview', {
         method: 'POST',

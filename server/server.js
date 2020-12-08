@@ -32,7 +32,6 @@ app.post("/addReview", async (req, res) => {
     collection = db.collection("Reviews");
     const movie = {
         title: req.body.title,
-        year: req.body.year,
         cast: req.body.cast,
         rating: req.body.rating,
         notes: req.body.notes
@@ -64,7 +63,6 @@ app.post("/addWatchList", async (req, res) => {
     collection = db.collection("Watch List");
     const movie = {
         title: req.body.title,
-        year: req.body.year,
         cast: req.body.cast,
         notes: req.body.notes
     };

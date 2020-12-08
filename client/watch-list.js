@@ -9,11 +9,6 @@ window.addEventListener("load", function() {
     titleHead.appendChild(titleHeadText);
     header.appendChild(titleHead);
 
-    const yearHead = document.createElement("th");
-    const yearHeadText = document.createTextNode("Year");
-    yearHead.appendChild(yearHeadText);
-    header.appendChild(yearHead);
-
     const castHead = document.createElement("th");
     const castHeadText = document.createTextNode("Notable Cast");
     castHead.appendChild(castHeadText);
@@ -34,10 +29,6 @@ window.addEventListener("load", function() {
                 const titleText = document.createTextNode(data[i].title);
                 title.appendChild(titleText);
 
-                const year = row.insertCell();
-                const yearText = document.createTextNode(data[i].year);
-                year.appendChild(yearText);
-
                 const cast = row.insertCell();
                 const castText = document.createTextNode(data[i].cast);
                 cast.appendChild(castText);
@@ -51,7 +42,6 @@ window.addEventListener("load", function() {
 
 document.getElementById("addWatchListButton").addEventListener('click', async function() {
     const movie = {"title": document.getElementById("title").value,
-                    "year": document.getElementById("year").value,
                     "cast": document.getElementById("cast").value,
                     "notes": document.getElementById("notes").value,
                     };

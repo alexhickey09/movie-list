@@ -1,16 +1,15 @@
-.col {
-    text-align: center;
+.title-col {
+  width: 20%;
 }
 
-DIV.table 
-{
-    display:table;
+.cast-col {
+  width: 20%;
 }
-FORM.tr, DIV.tr
-{
-    display:table-row;
+
+.rating-col {
+  width: 1%;
 }
-SPAN.td
-{
-    display:table-cell;
+
+.notes-col {
+  width: 45%;
 }
