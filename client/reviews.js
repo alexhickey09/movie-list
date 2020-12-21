@@ -10,6 +10,8 @@ window.addEventListener("load", function() {
     titleHead.appendChild(titleHeadText);
     header.appendChild(titleHead);
 
+    //titleHead.addEventListener("click", sortTable); //Sorting by title
+
     const castHead = document.createElement("th");
     castHead.classList.add("cast-col");
     const castHeadText = document.createTextNode("Notable Cast");
@@ -21,6 +23,8 @@ window.addEventListener("load", function() {
     const ratingHeadText = document.createTextNode("Rating");
     ratingHead.appendChild(ratingHeadText);
     header.appendChild(ratingHead);
+
+    ratingHead.addEventListener("click", sortTableRating);
 
     const notesHead = document.createElement("th");
     notesHead.classList.add("notes-col");
@@ -68,3 +72,43 @@ document.getElementById("addReviewButton").addEventListener('click', async funct
         body: JSON.stringify(movie),
     });
 });
+
+function sortTableRating() {
+    console.log("test");
+    console.log(document.getElementById("reviewsTable").rows.item(1).cells[0].innerHTML);
+    let tableRows = document.getElementById("reviewsTable").rows;
+    let tLength = tableRows.length, allRows = [];
+    for(let i = tLength - 1; i > 0; i--) {
+        let rowItem = [tableRows[i].cells[0].innerHTML, tableRows[i].cells[1].innerHTML, tableRows[i].cells[2].innerHTML, tableRows[i].cells[3].innerHTML];
+        allRows.push(rowItem);
+        tableRows[i].remove();
+    }
+    console.log(allRows);
+
+    let sorted = allRows.sort(function(a, b) {
+        return b[2] - a[2];
+    });
+    
+    //Here TODO: Check if array is already sorted, and if it is, put it in descending order
+
+    const table = document.getElementById("reviewsTable");
+    for(let i = 0; i < allRows.length; i++) {
+        const row = table.insertRow();
+
+        const title = row.insertCell();
+        const titleText = document.createTextNode(sorted[i][0]);
+        title.appendChild(titleText);
+
+        const cast = row.insertCell();
+        const castText = document.createTextNode(sorted[i][1]);
+        cast.appendChild(castText);
+
+        const rating = row.insertCell();
+        const ratingText = document.createTextNode(sorted[i][2]);
+        rating.appendChild(ratingText);
+
+        const notes = row.insertCell();
+        const notesText = document.createTextNode(sorted[i][3]);
+        notes.appendChild(notesText);
+    }
+}
