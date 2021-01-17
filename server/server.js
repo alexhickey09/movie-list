@@ -34,7 +34,8 @@ app.post("/addReview", async (req, res) => {
         title: req.body.title,
         cast: req.body.cast,
         rating: req.body.rating,
-        notes: req.body.notes
+        notes: req.body.notes,
+        date: req.body.date
     };
 
     collection.insertOne(movie, (err) => {

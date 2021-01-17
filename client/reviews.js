@@ -34,6 +34,12 @@ window.addEventListener("load", function() {
     notesHead.appendChild(notesHeadText);
     header.appendChild(notesHead);
 
+    const dateHead = document.createElement("th");
+    dateHead.classList.add("rating-col"); //Same size scheme as rating colume
+    const dateHeadText = document.createTextNode("Date Added");
+    dateHead.appendChild(dateHeadText);
+    header.appendChild(dateHead);
+
     fetch('/viewReviews')
         .then(response => response.json())
         .then(data => {
@@ -55,15 +61,22 @@ window.addEventListener("load", function() {
                 const notes = row.insertCell();
                 const notesText = document.createTextNode(data[i].notes);
                 notes.appendChild(notesText);
+
+                const date = row.insertCell();
+                const dateText = document.createTextNode(data[i].date);
+                date.appendChild(dateText);
             }
         });
 });
 
 document.getElementById("addReviewButton").addEventListener('click', async function() {
+    const defaultDate = document.getElementById("date").value;
+    const formattedDate = defaultDate.substring(5, 7) + "/" + defaultDate.substring(8) + "/" + defaultDate.substring(0,4);
     const movie = {"title": document.getElementById("title").value,
                     "cast": document.getElementById("cast").value,
                     "rating": document.getElementById("rating").value,
                     "notes": document.getElementById("notes").value,
+                    "date": formattedDate,
                   };
 
     fetch('./addReview', {
@@ -80,7 +93,7 @@ function sortTable(field) {
     const tableRows = document.getElementById("reviewsTable").rows;
     const tLength = tableRows.length, allRows = [];
     for(let i = tLength - 1; i > 0; i--) {
-        const rowItem = [tableRows[i].cells[0].innerHTML, tableRows[i].cells[1].innerHTML, tableRows[i].cells[2].innerHTML, tableRows[i].cells[3].innerHTML];
+        const rowItem = [tableRows[i].cells[0].innerHTML, tableRows[i].cells[1].innerHTML, tableRows[i].cells[2].innerHTML, tableRows[i].cells[3].innerHTML, tableRows[i].cells[4].innerHTML];
         allRows.unshift(rowItem);
         tableRows[i].remove();
     }
@@ -94,6 +107,8 @@ function sortTable(field) {
             return b[field] - a[field];
         });
     }
+
+    //TODO NEXT TIME: allow movies to be sorted by dates. Add date column and all sorting features to reviews. Add entire list of movies and reviews
 
     if(JSON.stringify(sorted) === JSON.stringify(allRows)) { //Sort in descending order if the list is already sorted
         sorted.reverse();
@@ -119,5 +134,9 @@ function sortTable(field) {
         const notes = row.insertCell();
         const notesText = document.createTextNode(sorted[i][3]);
         notes.appendChild(notesText);
+
+        const date = row.insertCell();
+        const dateText = document.createTextNode(sorted[i][4]);
+        date.appendChild(dateText);
     }
 }
