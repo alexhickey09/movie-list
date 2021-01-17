@@ -85,7 +85,7 @@ function sortTable(field) {
         tableRows[i].remove();
     }
 
-    let sorted = [...allRows];
+    const sorted = [...allRows];
     if(field === 0) { //Sorting strings
         sorted.sort();
     }
