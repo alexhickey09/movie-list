@@ -6,11 +6,12 @@ window.addEventListener("load", function() {
     
     const titleHead = document.createElement("th");
     titleHead.classList.add("title-col");
+    titleHead.classList.add("sortable");
     const titleHeadText = document.createTextNode("Movie Title");
     titleHead.appendChild(titleHeadText);
     header.appendChild(titleHead);
 
-    //titleHead.addEventListener("click", sortTable); //Sorting by title
+    titleHead.addEventListener("click", function() {sortTable(0)}); //Sorting by title
 
     const castHead = document.createElement("th");
     castHead.classList.add("cast-col");
@@ -25,7 +26,7 @@ window.addEventListener("load", function() {
     ratingHead.appendChild(ratingHeadText);
     header.appendChild(ratingHead);
 
-    ratingHead.addEventListener("click", sortTableRating);
+    ratingHead.addEventListener("click", function() {sortTable(2)});
 
     const notesHead = document.createElement("th");
     notesHead.classList.add("notes-col");
@@ -74,7 +75,8 @@ document.getElementById("addReviewButton").addEventListener('click', async funct
     });
 });
 
-function sortTableRating() {
+//@param {number} field: the field to be sorted. 0 = title, 2 = rating
+function sortTable(field) {
     let tableRows = document.getElementById("reviewsTable").rows;
     let tLength = tableRows.length, allRows = [];
     for(let i = tLength - 1; i > 0; i--) {
@@ -84,16 +86,19 @@ function sortTableRating() {
     }
 
     let sorted = [...allRows];
-    sorted.sort(function(a, b) {
-        return b[2] - a[2];
-    });
-    if(JSON.stringify(sorted) === JSON.stringify(allRows)) { //Sort in descending order if the list is already sorted
+    if(field === 0) { //Sorting strings
+        sorted.sort();
+    }
+    else if(field === 2) { //Sorting numbers
         sorted.sort(function(a, b) {
-            return a[2] - b[2];
+            return b[field] - a[field];
         });
     }
+
+    if(JSON.stringify(sorted) === JSON.stringify(allRows)) { //Sort in descending order if the list is already sorted
+        sorted.reverse();
+    }
     
-    //Here TODO: Check if array is already sorted, and if it is, put it in descending order
 
     const table = document.getElementById("reviewsTable");
     for(let i = 0; i < allRows.length; i++) {
