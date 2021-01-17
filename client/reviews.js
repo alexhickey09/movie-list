@@ -11,7 +11,7 @@ window.addEventListener("load", function() {
     titleHead.appendChild(titleHeadText);
     header.appendChild(titleHead);
 
-    titleHead.addEventListener("click", function() {sortTable(0)}); //Sorting by title
+    titleHead.addEventListener("click", function() {sortTable(0);}); //Sorting by title
 
     const castHead = document.createElement("th");
     castHead.classList.add("cast-col");
@@ -26,7 +26,7 @@ window.addEventListener("load", function() {
     ratingHead.appendChild(ratingHeadText);
     header.appendChild(ratingHead);
 
-    ratingHead.addEventListener("click", function() {sortTable(2)});
+    ratingHead.addEventListener("click", function() {sortTable(2);});
 
     const notesHead = document.createElement("th");
     notesHead.classList.add("notes-col");
@@ -77,10 +77,10 @@ document.getElementById("addReviewButton").addEventListener('click', async funct
 
 //@param {number} field: the field to be sorted. 0 = title, 2 = rating
 function sortTable(field) {
-    let tableRows = document.getElementById("reviewsTable").rows;
-    let tLength = tableRows.length, allRows = [];
+    const tableRows = document.getElementById("reviewsTable").rows;
+    const tLength = tableRows.length, allRows = [];
     for(let i = tLength - 1; i > 0; i--) {
-        let rowItem = [tableRows[i].cells[0].innerHTML, tableRows[i].cells[1].innerHTML, tableRows[i].cells[2].innerHTML, tableRows[i].cells[3].innerHTML];
+        const rowItem = [tableRows[i].cells[0].innerHTML, tableRows[i].cells[1].innerHTML, tableRows[i].cells[2].innerHTML, tableRows[i].cells[3].innerHTML];
         allRows.unshift(rowItem);
         tableRows[i].remove();
     }
