@@ -13,3 +13,7 @@
 .notes-col {
   width: 45%;
 }
+
+.sortable:hover {
+  cursor: pointer;
+}

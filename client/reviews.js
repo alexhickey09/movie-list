@@ -20,6 +20,7 @@ window.addEventListener("load", function() {
 
     const ratingHead = document.createElement("th");
     ratingHead.classList.add("rating-col");
+    ratingHead.classList.add("sortable");
     const ratingHeadText = document.createTextNode("Rating");
     ratingHead.appendChild(ratingHeadText);
     header.appendChild(ratingHead);
@@ -74,20 +75,23 @@ document.getElementById("addReviewButton").addEventListener('click', async funct
 });
 
 function sortTableRating() {
-    console.log("test");
-    console.log(document.getElementById("reviewsTable").rows.item(1).cells[0].innerHTML);
     let tableRows = document.getElementById("reviewsTable").rows;
     let tLength = tableRows.length, allRows = [];
     for(let i = tLength - 1; i > 0; i--) {
         let rowItem = [tableRows[i].cells[0].innerHTML, tableRows[i].cells[1].innerHTML, tableRows[i].cells[2].innerHTML, tableRows[i].cells[3].innerHTML];
-        allRows.push(rowItem);
+        allRows.unshift(rowItem);
         tableRows[i].remove();
     }
-    console.log(allRows);
 
-    let sorted = allRows.sort(function(a, b) {
+    let sorted = [...allRows];
+    sorted.sort(function(a, b) {
         return b[2] - a[2];
     });
+    if(JSON.stringify(sorted) === JSON.stringify(allRows)) { //Sort in descending order if the list is already sorted
+        sorted.sort(function(a, b) {
+            return a[2] - b[2];
+        });
+    }
     
     //Here TODO: Check if array is already sorted, and if it is, put it in descending order
 
